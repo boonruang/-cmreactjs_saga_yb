@@ -1,14 +1,12 @@
-import { put, takeEvery } from 'redux-saga/effects'
-import {
-  ADD,
-  ADD_REQ,
-  DECREMENT,
-  DECREMENT_REQ,
-  INCREMENT,
-  INCREMENT_REQ,
-} from '../actionTypes'
+import { put, delay } from 'redux-saga/effects'
+import { ADD, DECREMENT, INCREMENT } from '../actionTypes'
 
 export function* setIncrementAction() {
+  yield put({ type: INCREMENT })
+}
+
+export function* setIncrementAsyncAction() {
+  yield delay(1000)
   yield put({ type: INCREMENT })
 }
 
@@ -18,18 +16,4 @@ export function* setDecrementAction() {
 
 export function* setAddAction({ payload }) {
   yield put({ type: ADD, payload })
-}
-
-///---------------------------
-
-export function* watchIncrementAction() {
-  yield takeEvery(INCREMENT_REQ, setIncrementAction)
-}
-
-export function* watchDecrementAction() {
-  yield takeEvery(DECREMENT_REQ, setDecrementAction)
-}
-
-export function* watchAddAction() {
-  yield takeEvery(ADD_REQ, setAddAction)
 }
