@@ -1,36 +1,38 @@
 import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import * as actions from './redux/actions/counter.action'
+import { ADD_REQ, DECREMENT_REQ, INCREMENT_REQ } from './redux/actionTypes'
 
 export default function App() {
   const dispatch = useDispatch()
+  const action = (type, payload) => dispatch({ type, payload })
   const counterReducer = useSelector(({ counterReducer }) => counterReducer)
+
   return (
     <>
-      <button
+      {/* <button
         onClick={() => {
           dispatch(actions.onIncrementAsync())
         }}
       >
         Increment after 1 second
-      </button>
+      </button> */}
       <button
         onClick={() => {
-          dispatch(actions.onIncrement())
+          action(INCREMENT_REQ)
         }}
       >
         Increment
       </button>
       <button
         onClick={() => {
-          dispatch(actions.onDecrement())
+          action(DECREMENT_REQ)
         }}
       >
         Decrement
       </button>
       <button
         onClick={() => {
-          dispatch(actions.onAdd(10))
+          action(ADD_REQ, 10)
         }}
       >
         Add
